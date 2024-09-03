@@ -1,0 +1,8 @@
+import pandas as pd
+
+def total_time(employees: pd.DataFrame) -> pd.DataFrame:
+    employees['time']= employees['out_time'] - employees['in_time']
+    employees= employees.groupby(['event_day','emp_id'])['time'].sum().reset_index()
+    employees.rename({'event_day':'day'},axis=1,inplace=True)
+    employees.rename({'time':'total_time'},axis=1,inplace=True)
+    return employees
